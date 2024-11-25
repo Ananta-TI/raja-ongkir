@@ -1,0 +1,273 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Dokumentasi API",
+        "description": "Lorem Ipsum",
+        "contact": {
+            "email": "hi.wasisubekti02@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://my-default-host.com",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/api/beritas": {
+            "get": {
+                "tags": [
+                    "Berita"
+                ],
+                "summary": "Menampilkan semua berita",
+                "description": "Menampilkan daftar berita.",
+                "operationId": "499d2b81bd4abfdf49a13a6d8825cd51",
+                "responses": {
+                    "200": {
+                        "description": "Daftar berita",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Berita"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Berita"
+                ],
+                "summary": "Membuat berita baru",
+                "description": "Membuat berita baru.",
+                "operationId": "d214f7ba23b58a59360ead52e420b397",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "judul",
+                                    "isi_berita"
+                                ],
+                                "properties": {
+                                    "judul": {
+                                        "type": "string",
+                                        "example": "Berita Baru"
+                                    },
+                                    "isi_berita": {
+                                        "type": "string",
+                                        "example": "Isi berita"
+                                    },
+                                    "gambar": {
+                                        "type": "string",
+                                        "example": "image.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berita berhasil dibuat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Berita"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/beritas/{id}": {
+            "get": {
+                "tags": [
+                    "Berita"
+                ],
+                "summary": "Menampilkan berita berdasarkan ID",
+                "description": "Menampilkan satu berita berdasarkan ID.",
+                "operationId": "9d245a74262ccbb7e6a67530bb606e40",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID berita",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berita ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Berita"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Berita tidak ditemukan"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Berita"
+                ],
+                "summary": "Mengupdate berita berdasarkan ID",
+                "description": "Mengupdate berita yang ada.",
+                "operationId": "9f7f79089f13ec7bf5ce657385ffe15f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID berita",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "judul": {
+                                        "type": "string",
+                                        "example": "Judul Diperbarui"
+                                    },
+                                    "isi_berita": {
+                                        "type": "string",
+                                        "example": "Isi berita diperbarui"
+                                    },
+                                    "gambar": {
+                                        "type": "string",
+                                        "example": "gambar-diperbarui"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berita berhasil diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Berita"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Berita tidak ditemukan"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Berita"
+                ],
+                "summary": "Menghapus berita berdasarkan ID",
+                "description": "Menghapus berita berdasarkan ID.",
+                "operationId": "a8872407f2a61275433a8d4df91c4e7f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID berita",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berita berhasil dihapus"
+                    },
+                    "404": {
+                        "description": "Berita tidak ditemukan"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Berita": {
+                "properties": {
+                    "id": {
+                        "description": "The ID of the berita",
+                        "type": "integer"
+                    },
+                    "judul": {
+                        "description": "The title of the berita",
+                        "type": "string"
+                    },
+                    "isi_berita": {
+                        "description": "The content of the berita",
+                        "type": "string"
+                    },
+                    "gambar": {
+                        "description": "The image URL for the berita",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Berita",
+            "description": "Berita"
+        }
+    ]
+}
